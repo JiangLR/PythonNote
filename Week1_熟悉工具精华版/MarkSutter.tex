@@ -1,0 +1,202 @@
+\documentclass[9pt]{beamer}
+\usetheme{Warsaw}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\author{Mark Sutter}
+\title{The Law of Large Numbers}
+\setbeamercovered{transparent} 
+\setbeamertemplate{navigation symbols}{} 
+\logo{} 
+\institute{Iowa State University} 
+\date{9-29-2014} 
+\subject{Mathematics} 
+
+\begin{document}
+
+\setbeamercovered{invisible}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}{Outline}
+\tableofcontents
+\end{frame}
+
+\section{Introduction}
+\subsection{Why is the Law of Large Numbers important?}
+
+
+\begin{frame}{Why is the Law of Large Numbers important?}
+
+
+\begin{itemize}
+  \item It guarantees a kind of \textit{aggregate} predictability when dealing with many typical random variables. 
+\end{itemize}\pause
+
+ \begin{itemize}
+    \item Important to:
+     \begin{itemize}
+    \item Gamblers\pause
+    \item Statisticians \pause
+    \item Actuaries \pause
+    \item And everyone else!
+    \end{itemize}
+ \end{itemize} 
+\end{frame}
+
+\subsection{Why prove it?}
+\begin{frame}{Why prove it?}
+
+Short answer: We're mathematicians. \textbf{Q.E.D.}
+\\[.5in]
+Long answer: While the Law of Large Numbers makes intuitive sense, intuition can be wrong. The example we will discuss later is illustrative. 
+
+\end{frame}
+
+\subsection{History}
+\begin{frame}{History}
+
+\begin{itemize}
+
+\item In the 1500s, Gerolamo Cardano first intuited the Law of Large Numbers
+\item In 1713—after \textbf{20} years of work—Jacob Bernoulli first proved a form of the Law.
+\item Many others have contributed to the final modern form of the Law since Bernoulli.
+
+\end{itemize}
+
+\end{frame}
+
+\section{Preliminaries}
+
+\subsection{Stat 101}
+
+\begin{frame}{Some facts we will need}
+
+Let $X_{1},\ldots,X_{n}$ be i.i.d. with $E(X_{i})=\mu$ and $V(X_{i})=\sigma^{2}$. Let $S_{n}=\sum_{i=1}^{n}X_{i}$ and $A_{n}=\frac{1}{n}\sum_{i=1}^{n}X_{i}$. \pause Then: 
+\begin{enumerate}
+  \item $V(S_{n})=n\sigma^{2}$\pause
+  \item $V(A_{n})=\frac{\sigma^{2}}{n}$\pause 
+  \item $E(A_{n})=\mu$
+\end{enumerate}
+
+\end{frame}
+
+\subsection{Definition of ``convergence in probability"}
+
+
+\begin{frame}{Convergence in probability}
+
+A sequence of random variables $(X_{n})$ converges in probability toward $\mu$ if $\forall \epsilon>0$
+\[ \lim_{n\rightarrow \infty}P\left( \left| X_{n}-\mu \right|\geq \epsilon \right) = 0 \]
+
+\end{frame}
+
+
+\subsection{Chebyshev's Inequality}
+
+
+\begin{frame}{Chebyshev's inequality}
+
+Let $X$ be a discrete random variable with $E(X) = \mu$. Let $\epsilon>0$ be given. Then 
+\[ P\left( \left| X-\mu \right| \geq \epsilon \right) \leq \frac{V(X)}{\epsilon^{2}}\]
+
+\end{frame}
+
+\begin{frame}{Proof}
+\pause
+$V(X)=\sum_{x}\left( x-\mu \right)^{2}f(x)$ \pause \\ 
+$\geq \sum_{\left| x - \mu \right|\geq \epsilon}\left( x-\mu \right)^{2}f(x) $ \pause \\
+$\geq \sum_{\left| x - \mu \right|\geq \epsilon}\epsilon^{2}f(x)$ \pause \\
+$= \epsilon^{2}\sum_{\left| x - \mu \right|\geq \epsilon}f(x)$ \pause \\
+$= \epsilon^{2}P\left( \left| X-\mu \right|\geq \epsilon \right)$ \pause
+
+Hence \[ P\left( \left| X-\mu \right| \geq \epsilon \right) \leq \frac{V(X)}{\epsilon^{2}} \square\]
+\end{frame}
+
+\section{The (Weak) Law Of Large Numbers}
+\subsection{Theorem}
+
+\begin{frame}{Here's the Theorem:}
+
+Let $X_{1},\ldots,X_{n}$ be i.i.d. with $E(X_{i})=\mu <\infty$ and $V(X_{i})=\sigma^{2}<\infty$. Let $S_{n}=\sum_{i}X_{i}$. Then $\forall \epsilon>0$, 
+\[ \lim_{n\rightarrow \infty }P\left( \left| \frac{S_{n}}{n}-\mu \right|\geq \epsilon \right) =0 \]
+
+\end{frame}
+
+\subsection{Proof}
+
+\begin{frame}{Proof}
+\pause
+Let $X=\frac{S_{n}}{n}$ with $E(X)=\mu$.\pause Using Chebyshev's Inequality, given $\epsilon>0$,\\
+
+$P\left( \left| \frac{S_{n}}{n} -\mu \right|\geq \epsilon \right)\leq \frac{V\left( \frac{S_{n}}{n} \right)}{\epsilon^{2}}$\\ \pause
+$\Leftrightarrow P\left( \left| \frac{S_{n}}{n} -\mu \right|\geq \epsilon \right)\leq \frac{\sigma^{2}}{n\epsilon^{2}}$ \\ \pause
+$\Leftrightarrow \lim_{n\rightarrow \infty}P\left( \left| \frac{S_{n}}{n} -\mu \right|\geq \epsilon \right)=0\square$
+
+
+\end{frame}    
+
+\section{The (Strong) Law Of Large Numbers}
+\subsection{Theorem}
+
+\begin{frame}{Here's the Theorem:}
+
+\[P\left( \lim_{n\rightarrow \infty}\frac{S_{n}}{n}=\mu \right) = 1\]
+
+\end{frame}
+
+\subsection{Strong vs. Weak Law}
+
+\begin{frame}{What's the difference?}
+
+\[P\left( \lim_{n\rightarrow \infty}\frac{S_{n}}{n}=\mu \right) = 1 \textbf{ vs. } \lim_{n\rightarrow \infty }P\left( \left| \frac{S_{n}}{n}-\mu \right|\geq \epsilon \right) =0\]
+
+\end{frame}
+
+\section{Where the Law fails (e.g.)}
+
+\begin{frame}{Cauchy Distributed RVs}
+
+If you take the ratio of two standard normal RVs, its distribution is called the standard Cauchy distribution, which has pdf
+\[f(x;0,1)=\frac{1}{\pi(1+x^{2})}.\]
+
+\[\int_{-\infty}^{\infty}x\frac{1}{\pi(1+x^{2})}dx \textbf{  does not exist! }\]
+\end{frame}
+
+\section{Credits}
+
+\begin{frame}{Works Cited}
+
+\begin{itemize}
+\item \url{http://en.wikipedia.org/wiki/Law_of_large_numbers}
+\item \url{http://en.wikipedia.org/wiki/Cauchy_distribution}
+\item \url{http://www.dartmouth.edu/~chance/teaching_aids/books_articles/probability_book/book.html}
+\begin{itemize}
+\item Charles M. Grinstead
+\item J. Laurie Snell
+\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Special thanks to:}
+
+\begin{itemize}
+
+\item FOSS (Free and Open Source Software)
+\begin{itemize}
+\item Ubuntu
+\item TexMaker
+\item TexLive
+\item Beamer 
+\end{itemize}
+
+\end{itemize}
+
+\end{frame}
+
+\end{document}
