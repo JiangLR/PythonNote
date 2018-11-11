@@ -21,10 +21,9 @@ class ArticlespiderPipeline(object):
 class ArticleImagePipLine(ImagesPipeline):
     def item_completed(self, results, item, info):
         # 通过results获得文件实际的存储路径
-        if "front_image_url" in item:
-            for ok, value in results:
-                image_file_path = value["path"]
-            item["front_image_path"] = image_file_path
+        for ok, value in results:
+            image_file_path = value['path']
+        item['front_image_path'] = image_file_path
 
         return item
 
@@ -109,13 +108,9 @@ class MysqlTwistedPipline(object):
     def do_insert(self, cursor, item):
         # 执行具体的插入
         # 根据不同的item 构建不同的sql语句并插入到mysql中
-        # insert_sql = """
-        #             insert into article(title, url, create_date, fav_nums, url_object_id)
-        #             VALUES (%s, %s, %s, %s, %s)
-        #         """
-        # cursor.execute(insert_sql,
-        #                (item["title"], item["url"], item["create_date"], item["fav_nums"], item["url_object_id"]))
-        # 完整版
-        insert_sql, params = item.get_insert_sql()
-        print(insert_sql, params)
-        cursor.execute(insert_sql, params)
+        insert_sql = """
+                    insert into article(title, url, create_date, fav_nums, url_object_id)
+                    VALUES (%s, %s, %s, %s, %s)
+                """
+        cursor.execute(insert_sql,
+                            (item["title"], item["url"], item["create_date"], item["fav_nums"], item["url_object_id"]))
