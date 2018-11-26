@@ -1,0 +1,595 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{6.Items??}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  数据爬取的主要目的就是从非结构性的数据源来提取到结构性的数据。比如说网页，它是一个非结构性数据，我们把很多网站上的网页获取下来之后，把它们结构化成我们自己定义的结构。
+\item
+  但是当我们提取了这些数据之后如何将数据返回：最简单的是把返回的数据放入一个字典当中，通过字典返回给Scrapy
+\item
+  虽然字典(dict)很好用，但是dict缺乏一些结构性的元素，比如容易打错字段的名字，在统一处理字典时容易出错
+
+\begin{verbatim}
+爬虫A返回字典
+A:
+{
+'fav_nums':
+'comment_nums:'
+}
+爬虫B返回字典
+B:
+{
+'fav_num':
+'comment_num'
+}
+\end{verbatim}
+\item
+  为了进行完整的格式化，Scrapy提供了Item类(items.py)，Item类允许用户自定义字段，比如自定义'Article'Item类，在Article统一定义各种爬虫所共有的字段
+\item
+  当我们队Item进行实例化之后，在对应的py文件里进行yield操作时，比如通过parse()获得了一个Item类，然后直接把Item类yield就行了，Scrapy在接受yield时，发现这是一个Item实例的时候，会直接将该Item路由到'piplines.py'文件里
+
+  \begin{itemize}
+  \item
+    好处：在'piplines.py'文件里集中处理数据的保存,去重...
+
+\begin{verbatim}
+def parse(self, response):  
+post_urls = response.css("#archive .floated-thumb .post-thumb a::attr(href)").extract()
+for post_url in post_urls:
+    yield Request(url=parse.urljoin(response.url, post_url), callback=self.parse_detail)
+\end{verbatim}
+  \end{itemize}
+\end{enumerate}
+
+    \paragraph{\texorpdfstring{\emph{拓展延伸 详情页： 列表页： }
+因为对于Item类的处理是在parse\_detail()方法中定义并且进行的，如果我们想在Item中保存对应文章列表页的图片，需要将列表页的图片传递到parse\_detail()进行处理}{拓展延伸 详情页： 列表页：  因为对于Item类的处理是在parse\_detail()方法中定义并且进行的，如果我们想在Item中保存对应文章列表页的图片，需要将列表页的图片传递到parse\_detail()进行处理}}\label{ux62d3ux5c55ux5ef6ux4f38-ux8be6ux60c5ux9875-ux5217ux8868ux9875-ux56e0ux4e3aux5bf9ux4e8eitemux7c7bux7684ux5904ux7406ux662fux5728parse_detailux65b9ux6cd5ux4e2dux5b9aux4e49ux5e76ux4e14ux8fdbux884cux7684ux5982ux679cux6211ux4eecux60f3ux5728itemux4e2dux4fddux5b58ux5bf9ux5e94ux6587ux7ae0ux5217ux8868ux9875ux7684ux56feux7247ux9700ux8981ux5c06ux5217ux8868ux9875ux7684ux56feux7247ux4f20ux9012ux5230parse_detailux8fdbux884cux5904ux7406}
+
+\begin{itemize}
+\item
+  通过Request()方法中的meta参数进行传参，meta参数是一个dict(因为我们不仅可以只传递图片，还可以传递任意我们想要的参数，这些参数通过dict进行保存)
+
+\begin{verbatim}
+post_nodes = response.css("#archive .floated-thumb .post-thumb a")
+    for post_node in post_nodes:
+        image_url = post_node.css("img::attr(src)").extract_first("")
+        post_url = post_node.css("::attr(href)").extract_first("")
+        yield Request(url=parse.urljoin(response.url, post_url), meta={"front_image_url": image_url}
+            ,callback=self.parse_detail)
+\end{verbatim}
+\item
+  然后再parse\_details()用变量接受meta参数
+
+\begin{verbatim}
+def parse_detail(self, response):
+    # response.meta.get("front_image_url", "")是一种不会抛异常的方法，本质和response.meta['front_image_url']相同
+    front_image_url = response.meta.get("front_image_url", "")
+\end{verbatim}
+\end{itemize}
+
+    \subsection{item.py}\label{item.py}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  区别于其他数据类型(int, string...),
+  在Item类中只有一个字段类型：scrapy.Field()
+
+\begin{verbatim}
+class JobBoleArticleIte(scrapy.Item):
+    # 标题
+    title = scrapy.Field()
+    # 创建时间
+    create_date = scrapy.Field()
+    # 当前页面的url
+    url = scrapy.Field()
+    # URL对应的MD5
+    url_object_id = scrapy.Field()
+    # 封面图
+    front_image_url = scrapy.Field()
+    # 封面图本地存放路径
+    front_image_path = scrapy.Field()
+    # 点赞数
+    praise_nums = scrapy.Field()
+    # 评论数
+    comment_nums = scrapy.Field()
+    # 收藏数
+    fav_nums = scrapy.Field()
+    # 标签
+    tags = scrapy.Field()
+    # 内容
+    content = scrapy.Field()
+    pass
+\end{verbatim}
+\item
+  填充Item类中对应的字段
+
+  \begin{itemize}
+  \item
+    首先需要在py文件中导入Item类
+
+    \begin{itemize}
+    \tightlist
+    \item
+      from ArticleSpider.items import JobBoleArticleItem
+    \end{itemize}
+  \item
+    实例化Item类
+
+    \begin{itemize}
+    \tightlist
+    \item
+      article\_item = JobBoleArticleItem()
+    \end{itemize}
+  \item
+    填充Item对象
+
+    \begin{itemize}
+    \tightlist
+    \item
+      article\_item{[}"create\_date"{]} = create\_date......
+    \end{itemize}
+  \item
+    调用yield() \#
+    Scrapy在接受yield时，发现这是一个Item实例的时候，会直接将该Item路由到'piplines.py'文件里
+
+    \begin{itemize}
+    \tightlist
+    \item
+      yield article\_item
+    \end{itemize}
+  \item
+    使Pipline生效，从而能够处理Item
+
+\begin{verbatim}
+'settings.py'
+# Configure item pipelines
+# See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
+ITEM_PIPELINES = {
+    'ArticleSpider.pipelines.ArticlespiderPipeline': 300,
+}
+\end{verbatim}
+  \end{itemize}
+\item
+  给Item类中的字段添加功能(保存到本地......)
+
+  \begin{itemize}
+  \item
+    scrapy提供了一种自动下载图片的机制，只需要在'settings.py'进行配置
+
+    \begin{itemize}
+    \item
+      管道(PIPELINES)对象:数字表示数据在管道中流经的顺序,即处理类对数据处理的顺序：小-\textgreater{}大,先-\textgreater{}后
+
+\begin{verbatim}
+ITEM_PIPELINES = {
+    'ArticleSpider.pipelines.ArticlespiderPipeline': 300,
+    'scrapy.piplines.images.ImagesPipeline': 1
+}
+\end{verbatim}
+    \item
+      配置Item类中哪个字段代表的是图片，然后PIPLINE到Item中去取对应图片的字段
+
+\begin{verbatim}
+ITEM_PIPELINES = {
+    'ArticleSpider.pipelines.ArticlespiderPipeline': 300,
+    'scrapy.piplines.images.ImagesPipeline': 1
+    }
+IMAGE_URLS_FIELD = 'front_image_url'
+\end{verbatim}
+    \item
+      配置图片下载路径
+
+      \begin{itemize}
+      \tightlist
+      \item
+        这里有必要对路径的表示进行说明
+
+        \begin{itemize}
+        \tightlist
+        \item
+          os.path.abspath(os.path.dirname(\_\emph{file\_}))\\
+          -\textgreater{}G:\Python\PythonNote\Scrapy\ArticleSpider
+        \item
+          os.path.dirname(\_\emph{file\_}))\\
+          -\textgreater{}G:/Python/PythonNote/Scrapy/ArticleSpider
+        \item
+          os.path.dirname(os.path.abspath(\_\emph{file\_}))\\
+          -\textgreater{}G:\Python\PythonNote\Scrapy\ArticleSpider
+        \end{itemize}
+      \item
+        os.path.dirname()只是获取目录名字,而不是目录路径,在windows下反斜杠''才表示路径
+      \item
+        os.path.abspath()才是获取文件目录的地址 ``` ITEM\_PIPELINES = \{
+        'ArticleSpider.pipelines.ArticlespiderPipeline': 300,
+        'scrapy.piplines.images.ImagesPipeline': 1 \}
+        IMAGES\_URLS\_FIELD = 'front\_image\_url'
+      \end{itemize}
+
+      import os
+
+      project\_dir = os.path.abspath(os.path.dirname(\textbf{file}))
+      IMAGES\_STORE = os.path.join(project\_dir, 'images') ```
+    \item
+      下载处理图片的相关库(PIL)
+
+      \begin{itemize}
+      \tightlist
+      \item
+        pip install -i https://pypi.douban.com/simple pillow
+      \end{itemize}
+    \item
+      处理异常：raise ValueError('Missing scheme in request url: \%s' \%
+      self.\_url)
+
+      \begin{itemize}
+      \tightlist
+      \item
+        在PIPLINE处理图片时,IMAGE\_URLS\_FIELD被PIPLINE默认为数组类型，所以需要在相关py文件下把front\_image\_url设置为数组
+      \item
+        article\_item{[}"front\_image\_url"{]} = {[}front\_image\_url{]}
+      \end{itemize}
+    \end{itemize}
+  \item
+    图片既然已经保存下来了，就需要把图片的路径提取出来，然后把图片路径和front\_image\_path字段绑定在一起，以便之后进行存入数据库操作
+  \item
+    对于图片下载有与之对应的'scrapy.piplines.images.ImagesPipeline'类可以进行操作，但是把图片路径和front\_image\_path绑定在一起的处理类并没有现成的，
+    所以需要自定义一个能够处理对应功能的PIPLINE类 \#\#\#\#
+    (拓展)自定义PIPLINE类的编写方式：
+
+    \begin{itemize}
+    \tightlist
+    \item
+      注意重载
+    \item
+      注意返回item,因为处于管道后面的管道类同样需要处理item，如果不返回item，则处于序列后面的PIPELINE类就没有item可以处理了
+    \end{itemize}
+  \item
+    自定义的PIPELINE类需要继承ImagesPipeline里的部分功能重载，在此基础上自定义其他功能
+
+\begin{verbatim}
+    # 观察这个方法体的循环，就知道为什么我们需要把front_image_url设为数组形式的数据了
+    # 获得数组元素后，通过Request传递给scrapy进行下载
+    def get_media_requests(self, item, info):
+        return [Request(x) for x in item.get(self.images_urls_field, [])]
+\end{verbatim}
+
+\begin{verbatim}
+    # 重载这个方法之后就可以获得到文件的下载路径，路径存放在results参数里
+    def item_completed(self, results, item, info):
+        if isinstance(item, dict) or self.images_result_field in item.fields:
+            item[self.images_result_field] = [x for ok, x in results if ok]
+        return item
+\end{verbatim}
+
+\begin{verbatim}
+from scrapy.pipelines.images import ImagesPipeline
+
+class ArticleImagePipLine(ImagesPipeline):
+    def item_completed(self, results, item, info):
+        # 通过results获得文件实际的存储路径
+        for ok, value in results:
+            image_file_path = value['path']
+        item['front_image_path'] = image_file_path
+
+        return item
+\end{verbatim}
+
+    \begin{itemize}
+    \tightlist
+    \item
+      results{[}1{]}.path:文件存放路径
+    \item
+      results{[}1{]}.url:文件url
+    \item
+      results{[}0{]}:下载状态(是否成功)\\
+    \end{itemize}
+  \item
+    下一个PIPLINE接受数据(成功接收到front\_image\_path) 
+  \item
+    获取到数据之后就可以进行保存数据库...操作了
+  \end{itemize}
+\item
+  把不定长的url地址转换成定长的md5编码
+
+  \begin{itemize}
+  \item
+    新建相应的方法(get\_md5)
+
+\begin{verbatim}
+import hashlib
+def get_md5(url):
+if isinstance(url, str):
+    url = url.encode('utf-8')
+m = hashlib.md5()
+m.update(url)
+return m.hexdigest()
+\end{verbatim}
+  \end{itemize}
+\end{enumerate}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

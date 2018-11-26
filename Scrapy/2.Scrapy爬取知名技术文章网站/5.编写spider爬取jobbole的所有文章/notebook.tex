@@ -1,0 +1,460 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{5.??spider??jobbole?????}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \paragraph{通过列表页爬取所有文章的url地址}\label{ux901aux8fc7ux5217ux8868ux9875ux722cux53d6ux6240ux6709ux6587ux7ae0ux7684urlux5730ux5740}
+
+爬取完第一页后，将第二页传递给scrapy，让scrapy自动去爬取第二页 1.
+改写start\_urls * start\_urls = {[}'http://blog.jobbole.com/110287/'{]}
+-\textgreater{} start\_urls = {[}'http://blog.jobbole.com'{]} 2.
+改写parse函数 ``` def parse(self, response): '''
+1.获取文章列表页中的文章url并交给解析函数进行具体字段解析
+2.获取下一页的url并交给scrapy进行下载 ''' \#
+解析列表页中的所有文章url并交给scrapy下载后(通过Request函数创建对象交给scrapy)进行解析
+\# from scrapy.http import Request post\_urls = response.css("\#archive
+.floated-thumb .post-thumb a::attr(href)").extract() '''
+因为在某些网站里的的url是不完整的，也就是没有域名的，没有域名默认当前页面的域名
+比如'http://blog.jobbole.com/110287/'写成了'/110287/'，但是提取出href之后是提取不到域名的，
+所以需要把当前页面的域名和这个href做一个连接，这才是一个完整的HTTP的url地址
+只有当post\_url域名完整，才可以使用下面的写法 yield
+Request(url=post\_url, callback=self.parse\_detail)
+所以考虑这样一个逻辑： 完整域名 = response.url(域名地址) +
+post\_url(href值) Python提供了一个函数 -\textgreater{} parse.urljoin
+from urllib import parse \# 在Python2中格式为：import urlparse
+parse.urljoin(response.url, post\_url): response.url取域名 +
+post\_url取除域名外的部分 例：urljoin('http://www.cwi.nl/Python.html',
+'http://www.cwi.nl/FAQ.html') 结果为：'http://www.cwi.nl/FAQ.html' '''
+for post\_url in post\_urls: yield
+Request(url=parse.urljoin(response.url, post\_url),
+callback=self.parse\_detail)
+
+\begin{verbatim}
+# 提取下一页并交给scrapy进行下载
+(此时的回调函数不是parse_detail了，而是parse，因为此时的next_url为列表页，不是详情页)
+next_url = response.css('.next.page-numbers::attr(href)').extract()
+if next_url:
+    yield Request(url=parse.urljoin(response.url, next_url), callback=self.parse)
+
+pass
+```
+\end{verbatim}
+
+3.增添parse\_detail函数作为解析函数(回调函数)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{l+s+sd}{ def parse\PYZus{}detail(self, response):}
+        \PY{l+s+sd}{        \PYZsh{} 提取文章具体字段}
+        
+        \PY{l+s+sd}{        title = response.xpath(\PYZsq{}//div[@class=\PYZdq{}entry\PYZhy{}header\PYZdq{}]/h1/text()\PYZsq{}).extract()}
+        
+        \PY{l+s+sd}{        create\PYZus{}time = response.xpath(\PYZsq{}//p[@class=\PYZdq{}entry\PYZhy{}meta\PYZhy{}hide\PYZhy{}on\PYZhy{}mobile\PYZdq{}]/text()\PYZsq{}).extract()[0]. \PYZbs{}}
+        \PY{l+s+sd}{            strip().replace(\PYZsq{}·\PYZsq{}, \PYZsq{}\PYZsq{}).strip()}
+        
+        \PY{l+s+sd}{        praise\PYZus{}num = int(response.xpath(\PYZdq{}//span[contains(@class, \PYZsq{}vote\PYZhy{}post\PYZhy{}up\PYZsq{})]/h10/text()\PYZdq{}).extract()[0])}
+        
+        \PY{l+s+sd}{        fav\PYZus{}num = response.xpath(\PYZdq{}//span[contains(@class, \PYZsq{}bookmark\PYZhy{}btn\PYZsq{})]/text()\PYZdq{}).extract()[0]}
+        \PY{l+s+sd}{        match\PYZus{}re = re.match(\PYZsq{}.*?(\PYZbs{}d+).*\PYZsq{}, fav\PYZus{}num)}
+        \PY{l+s+sd}{        if match\PYZus{}re:}
+        \PY{l+s+sd}{            fav\PYZus{}num = match\PYZus{}re.group(1)}
+        \PY{l+s+sd}{        else:}
+        \PY{l+s+sd}{            fav\PYZus{}num = 0}
+        
+        \PY{l+s+sd}{        comments\PYZus{}num = response.xpath(\PYZdq{}//a[@href=\PYZsq{}\PYZsh{}article\PYZhy{}comment\PYZsq{}]/span/text()\PYZdq{}).extract()[0]}
+        \PY{l+s+sd}{        match\PYZus{}re = re.match(\PYZsq{}.*?(\PYZbs{}d+).*\PYZsq{}, comments\PYZus{}num)}
+        \PY{l+s+sd}{        if match\PYZus{}re:}
+        \PY{l+s+sd}{            comments\PYZus{}num = match\PYZus{}re.group(1)}
+        \PY{l+s+sd}{        else:}
+        \PY{l+s+sd}{            comments\PYZus{}num = 0}
+        \PY{l+s+sd}{        }
+        \PY{l+s+sd}{        tag\PYZus{}list = response.xpath(\PYZsq{}//p[@class=\PYZdq{}entry\PYZhy{}meta\PYZhy{}hide\PYZhy{}on\PYZhy{}mobile\PYZdq{}]/a/text()\PYZsq{}).extract()}
+        \PY{l+s+sd}{        tag\PYZus{}list = [element for element in tag\PYZus{}list if not element.strip().endswith(\PYZsq{}评论\PYZsq{})]}
+        \PY{l+s+sd}{        tags = \PYZsq{},\PYZsq{}.join(tag\PYZus{}list)}
+        \PY{l+s+sd}{        pass}
+        \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:} '\textbackslash{}n def parse\_detail(self, response):\textbackslash{}n        \# 提取文章具体字段\textbackslash{}n\textbackslash{}n        title = response.xpath(\textbackslash{}'//div[@class="entry-header"]/h1/text()\textbackslash{}').extract()\textbackslash{}n\textbackslash{}n        create\_time = response.xpath(\textbackslash{}'//p[@class="entry-meta-hide-on-mobile"]/text()\textbackslash{}').extract()[0].             strip().replace(\textbackslash{}'·\textbackslash{}', \textbackslash{}'\textbackslash{}').strip()\textbackslash{}n\textbackslash{}n        praise\_num = int(response.xpath("//span[contains(@class, \textbackslash{}'vote-post-up\textbackslash{}')]/h10/text()").extract()[0])\textbackslash{}n\textbackslash{}n        fav\_num = response.xpath("//span[contains(@class, \textbackslash{}'bookmark-btn\textbackslash{}')]/text()").extract()[0]\textbackslash{}n        match\_re = re.match(\textbackslash{}'.*?(\textbackslash{}\textbackslash{}d+).*\textbackslash{}', fav\_num)\textbackslash{}n        if match\_re:\textbackslash{}n            fav\_num = match\_re.group(1)\textbackslash{}n\textbackslash{}n        comments\_num = response.xpath("//a[@href=\textbackslash{}'\#article-comment\textbackslash{}']/span/text()").extract()[0]\textbackslash{}n        match\_re = re.match(\textbackslash{}'.*?(\textbackslash{}\textbackslash{}d+).*\textbackslash{}', comments\_num)\textbackslash{}n        if match\_re:\textbackslash{}n            comments\_num = match\_re.group(1)\textbackslash{}n\textbackslash{}n        tag\_list = response.xpath(\textbackslash{}'//p[@class="entry-meta-hide-on-mobile"]/a/text()\textbackslash{}').extract()\textbackslash{}n        tag\_list = [element for element in tag\_list if not element.strip().endswith(\textbackslash{}'评论\textbackslash{}')]\textbackslash{}n        tags = \textbackslash{}',\textbackslash{}'.join(tag\_list)\textbackslash{}n        pass\textbackslash{}n'
+\end{Verbatim}
+            
+    response.css("\#archive .floated-thumb .post-thumb
+a::attr(href)").extract()\\
+Out{[}4{]}: {[}'http://blog.jobbole.com/114321/',
+'http://blog.jobbole.com/114319/', 'http://blog.jobbole.com/114311/',
+'http://blog.jobbole.com/114308/', 'http://blog.jobbole.com/114303/',
+'http://blog.jobbole.com/114297/', 'http://blog.jobbole.com/114285/',
+'http://blog.jobbole.com/114283/', 'http://blog.jobbole.com/114280/',
+'http://blog.jobbole.com/114276/', 'http://blog.jobbole.com/114273/',
+'http://blog.jobbole.com/114270/', 'http://blog.jobbole.com/114268/',
+'http://blog.jobbole.com/114261/', 'http://blog.jobbole.com/114168/',
+'http://blog.jobbole.com/114256/', 'http://blog.jobbole.com/114253/',
+'http://blog.jobbole.com/114250/', 'http://blog.jobbole.com/114167/',
+'http://blog.jobbole.com/114241/'{]} \_\_\_ ？如何获取下一页
+
+next\_url =
+response.css('.next.page-numbers::attr(href)').extract(){[}0{]}\\
+Out{[}10{]}: {[}'http://blog.jobbole.com/all-posts/page/2/'{]}
+
+    \subsubsection{完整代码}\label{ux5b8cux6574ux4ee3ux7801}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k}{class} \PY{n+nc}{JobboleSpider}\PY{p}{(}\PY{n}{scrapy}\PY{o}{.}\PY{n}{Spider}\PY{p}{)}\PY{p}{:}
+            \PY{n}{name} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{jobbole}\PY{l+s+s1}{\PYZsq{}}
+            \PY{n}{allowed\PYZus{}domains} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blog.jobbole.com}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+            \PY{n}{start\PYZus{}urls} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{http://blog.jobbole.com/all\PYZhy{}posts/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        
+            \PY{k}{def} \PY{n+nf}{parse}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{response}\PY{p}{)}\PY{p}{:}
+                \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{        1.获取文章列表页中的文章url并交给解析函数进行具体字段解析}
+        \PY{l+s+sd}{        2.获取下一页的url并交给scrapy进行下载}
+        
+        \PY{l+s+sd}{        :param response:}
+        \PY{l+s+sd}{        :return:}
+        \PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+                \PY{n+nb}{print}\PY{p}{(}\PY{n}{response}\PY{o}{.}\PY{n}{url}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} 获取文章列表页中的文章url并交给解析函数(parse\PYZus{}detail)进行具体字段解析}
+                \PY{n}{post\PYZus{}urls} \PY{o}{=} \PY{n}{response}\PY{o}{.}\PY{n}{css}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZsh{}archive .floated\PYZhy{}thumb .post\PYZhy{}thumb a::attr(href)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{extract}\PY{p}{(}\PY{p}{)}
+                \PY{k}{for} \PY{n}{post\PYZus{}url} \PY{o+ow}{in} \PY{n}{post\PYZus{}urls}\PY{p}{:}
+                    \PY{n+nb}{print}\PY{p}{(}\PY{n}{response}\PY{o}{.}\PY{n}{url} \PY{o}{+} \PY{n}{post\PYZus{}url}\PY{p}{)}
+                    \PY{k}{yield} \PY{n}{Request}\PY{p}{(}\PY{n}{url}\PY{o}{=}\PY{n}{parse}\PY{o}{.}\PY{n}{urljoin}\PY{p}{(}\PY{n}{response}\PY{o}{.}\PY{n}{url}\PY{p}{,} \PY{n}{post\PYZus{}url}\PY{p}{)}\PY{p}{,} \PY{n}{callback}\PY{o}{=}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{parse\PYZus{}detail}\PY{p}{)}
+        
+                \PY{c+c1}{\PYZsh{} 提取下一页并交给scrapy进行下载(此时的回调函数不是parse\PYZus{}detail了，而是parse，因为此时的next\PYZus{}url为列表页，不是详情页)}
+                \PY{n}{next\PYZus{}url} \PY{o}{=} \PY{n}{response}\PY{o}{.}\PY{n}{css}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.next.page\PYZhy{}numbers::attr(href)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{extract}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                \PY{k}{if} \PY{n}{next\PYZus{}url}\PY{p}{:}
+                    \PY{k}{yield} \PY{n}{Request}\PY{p}{(}\PY{n}{url}\PY{o}{=}\PY{n}{parse}\PY{o}{.}\PY{n}{urljoin}\PY{p}{(}\PY{n}{response}\PY{o}{.}\PY{n}{url}\PY{p}{,} \PY{n}{next\PYZus{}url}\PY{p}{)}\PY{p}{,} \PY{n}{callback}\PY{o}{=}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{parse}\PY{p}{)}
+        
+            \PY{k}{def} \PY{n+nf}{parse\PYZus{}detail}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{response}\PY{p}{)}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{} 提取文章具体字段}
+        
+                \PY{n}{title} \PY{o}{=} \PY{n}{response}\PY{o}{.}\PY{n}{xpath}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{//div[@class=}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{entry\PYZhy{}header}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{]/h1/text()}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{extract}\PY{p}{(}\PY{p}{)}
+        
+                \PY{n}{create\PYZus{}time} \PY{o}{=} \PY{n}{response}\PY{o}{.}\PY{n}{xpath}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{//p[@class=}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{entry\PYZhy{}meta\PYZhy{}hide\PYZhy{}on\PYZhy{}mobile}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{]/text()}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{extract}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.} \PYZbs{}
+                    \PY{n}{strip}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{·}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)}
+        
+                \PY{n}{praise\PYZus{}num} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{response}\PY{o}{.}\PY{n}{xpath}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{//span[contains(@class, }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{vote\PYZhy{}post\PYZhy{}up}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{)]/h10/text()}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{extract}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+        
+                \PY{n}{fav\PYZus{}num} \PY{o}{=} \PY{n}{response}\PY{o}{.}\PY{n}{xpath}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{//span[contains(@class, }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{bookmark\PYZhy{}btn}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{)]/text()}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{extract}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                \PY{n}{match\PYZus{}re} \PY{o}{=} \PY{n}{re}\PY{o}{.}\PY{n}{match}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.*?(}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{d+).*}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fav\PYZus{}num}\PY{p}{)}
+                \PY{k}{if} \PY{n}{match\PYZus{}re}\PY{p}{:}
+                    \PY{n}{fav\PYZus{}num} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{match\PYZus{}re}\PY{o}{.}\PY{n}{group}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{n}{fav\PYZus{}num} \PY{o}{=} \PY{l+m+mi}{0}
+        
+                \PY{n}{comments\PYZus{}num} \PY{o}{=} \PY{n}{response}\PY{o}{.}\PY{n}{xpath}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{//a[@href=}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZsh{}article\PYZhy{}comment}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{]/span/text()}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{extract}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                \PY{n}{match\PYZus{}re} \PY{o}{=} \PY{n}{re}\PY{o}{.}\PY{n}{match}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.*?(}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{d+).*}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{comments\PYZus{}num}\PY{p}{)}
+                \PY{k}{if} \PY{n}{match\PYZus{}re}\PY{p}{:}
+                    \PY{n}{comments\PYZus{}num} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{match\PYZus{}re}\PY{o}{.}\PY{n}{group}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{n}{comments\PYZus{}num} \PY{o}{=} \PY{l+m+mi}{0}
+        
+                \PY{n}{tag\PYZus{}list} \PY{o}{=} \PY{n}{response}\PY{o}{.}\PY{n}{xpath}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{//p[@class=}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{entry\PYZhy{}meta\PYZhy{}hide\PYZhy{}on\PYZhy{}mobile}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{]/a/text()}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{extract}\PY{p}{(}\PY{p}{)}
+                \PY{n}{tag\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{n}{element} \PY{k}{for} \PY{n}{element} \PY{o+ow}{in} \PY{n}{tag\PYZus{}list} \PY{k}{if} \PY{o+ow}{not} \PY{n}{element}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{endswith}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{评论}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{]}
+                \PY{n}{tags} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{tag\PYZus{}list}\PY{p}{)}
+                \PY{k}{pass}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        NameError                                 Traceback (most recent call last)
+
+        <ipython-input-4-3868429a7597> in <module>()
+    ----> 1 class JobboleSpider(scrapy.Spider):
+          2     name = 'jobbole'
+          3     allowed\_domains = ['blog.jobbole.com']
+          4     start\_urls = ['http://blog.jobbole.com/all-posts/']
+          5 
+    
+
+        NameError: name 'scrapy' is not defined
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

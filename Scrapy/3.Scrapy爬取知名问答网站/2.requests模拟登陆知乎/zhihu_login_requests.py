@@ -29,6 +29,7 @@ def is_login():
     # 通过个人中心页面返回状态码来判断是否为登录状态
     inbox_url = "https://www.zhihu.com/inbox"
     # inbox_url = "https://www.zhihu.com/question/56250357/answer/148534773"
+    # 设置allow_redirects=False是因为如果页面被重定向了,response的状态码也是200.只有不允许被重定向的情况下返回的状态码才是302
     response = session.get(inbox_url, headers=header, allow_redirects=False)
     if response.status_code != 200:
         return False

@@ -34,8 +34,7 @@ class JobboleSpider(scrapy.Spider):
 
         # 提取文章的具体字段
         title = response.xpath('//div[@class="entry-header"]/h1/text()').extract_first("")
-        create_date = response.xpath("//p[@class='entry-meta-hide-on-mobile']/text()").extract()[0].strip().replace("·",
-                                                                                                                    "").strip()
+        create_date = response.xpath("//p[@class='entry-meta-hide-on-mobile']/text()").extract()                                 [0].strip().replace("·","").strip()
         praise_nums = response.xpath("//span[contains(@class, 'vote-post-up')]/h10/text()").extract()[0]
         fav_nums = response.xpath("//span[contains(@class, 'bookmark-btn')]/text()").extract()[0]
         match_re = re.match(".*?(\d+).*", fav_nums)
